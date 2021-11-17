@@ -1,48 +1,53 @@
 canvas= new fabric.Canvas("my_canvas")
 ctx=canvas.getContext("2d");
 
-img_height=100;
-img_width=60;
-img_x=100
-img_y=100
+img_height=430;
+img_width=350;
+img_x=1;
+img_y=1;
+image_ranger=""
 
-function add() {
-	img_imgTag = new Image(); 
-	img_imgTag.onload = uploadimg; 
-	img_imgTag.src = img_image;   
-}
-
-function uploadimg() {
-	ctx.drawImage(img_imgTag, img_x, img_y, img_width, img_height);
-}
+function new_image(get_image){
+    fabric.Image.fromURL(get_image,function(Img){
+    image_ranger=Img
+     image_ranger.scaleToWidth(img_width)
+     image_ranger.scaleToHeight(img_height)
+     image_ranger.set({
+        top:img_y,
+        left:img_x
+    })
+    canvas.add( image_ranger)
+    })
+    }
 
 window.addEventListener("keydown",my_keydown);
 function my_keydown(e){
     keypressed=e.keyCode
     console.log("keypressed");
 
-    if(keypressed==82){
-        red_ranger();
+    if(keypressed=='82'){
+        new_image('rr1.png')
         console.log("red");
     }
 
-    if(keypressed==66){
-        blue_ranger();
+    if(keypressed=='66'){
+        img_x=200;
         console.log("blue")
+        new_image('br.png')
     }
 
-    if(keypressed==71){
-        green_ranger();
+    if(keypressed=='71'){
+        img_x=350;
         console.log("green")
     }
 
-    if(keypressed==80){
-        pink_ranger();
+    if(keypressed=='80'){
+        img_x=600;
         console.log("pink")
     }
 
-    if(keypressed==89){
-        yellow_ranger();
+    if(keypressed=='89'){
+        img_x=700;
         console.log("yellow")
     }
 }
